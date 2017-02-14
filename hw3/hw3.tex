@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Econ C103 Problem Set 3}
+\author{Sahil Chinoy}
+
+\begin{document}
+\maketitle{}
+
+\subsection*{Exercise 1}
+
+Consider an incentive-compatible direct mechanism, and let $v(\theta) = u(a(\theta), \theta)$. Since $v(\theta)$ is uniformly continuous
+
+\begin{equation}
+v(\theta) = v(\underline{\theta}) + \int \limits_{\underline{\theta}} ^\theta v'(s) \, ds
+\end{equation}
+
+Incentive compatibility requires that agents of type $\theta$ weakly prefer to report their true type rather than any other type $\theta'$, and vice versa
+
+\begin{gather*}
+v(\theta) \geq u(a(\theta'), \theta) \\
+v(\theta') \geq u(a(\theta), \theta') 
+\end{gather*}
+
+This implies, for $\theta' \neq \theta$
+
+\begin{equation*}
+\frac{u(a(\theta'), \theta) - u(a(\theta'), \theta')}{\theta - \theta'} \leq \frac{v(\theta) - v(\theta')}{\theta - \theta'} \leq \frac{u(a(\theta), \theta) - u(a(\theta), \theta')}{\theta - \theta'}
+\end{equation*}
+
+Taking the limit as $\theta' \to \theta$
+
+\begin{gather*}
+u_\theta(a(\theta),\theta) \leq v'(\theta) \leq u_\theta(a(\theta),\theta) \\
+v'(\theta) = u_\theta(a(\theta),\theta)
+\end{gather*}
+
+Substituting into (1)
+
+\begin{gather}
+v(\theta) = v(\underline{\theta}) + \int \limits_{\underline{\theta}} ^\theta u_\theta(a(s),s) \, ds \nonumber \\
+u(a(\theta), \theta) = u(a(\underline{\theta}), \underline{\theta}) + \int \limits_{\underline{\theta}} ^\theta u_\theta(a(s),s) \, ds
+\end{gather}
+
+By the revelation principle, this characterization of incentive-compatible direct mechanisms applies to the set of outcomes of \textit{all} mechanisms.
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}[(a)]
+
+\item
+
+With $v(\theta) = u((x,t),\theta) = \sqrt{x(\theta)}\theta - t(\theta)$, we have $u_\theta = \sqrt{x(\theta)}$, so from (2)
+
+\begin{gather*}
+\sqrt{x(\theta)}\theta - t(\theta) = v(\underline{\theta}) + \int \limits_{\underline{\theta}} ^\theta \sqrt{x(s)} \, ds \\
+t(\theta) = \sqrt{x(\theta)}\theta - \left( \int \limits_{\underline{\theta}} ^\theta \sqrt{x(s)} \, ds + v(\underline{\theta})  \right)
+\end{gather*}
+
+\item
+
+This structure implies that the utility of type $\theta$ derived from participating in the mechanism is
+
+\begin{equation*}
+v(\theta) = \int \limits_{\underline{\theta}} ^\theta \sqrt{x(s)} \, ds + v(\underline{\theta})
+\end{equation*}
+
+For the participation constraint to hold, we need $v(\theta) \geq 0$ for all $\theta$. We know that $x(\theta)$ is monotonically increasing in incentive compatible direct mechanisms. This implies $\sqrt{x(\theta)}$ is increasing in $\theta$, so $\int \limits_{\underline{\theta}} ^\theta \sqrt{x(s)} \, ds \geq 0$ for any $\theta > \underline{\theta}$. Thus for the participation constraint to hold, we simply require $v(\underline{\theta}) \geq 0$.
+
+\item 
+
+The information rent for type $\theta$ is 
+
+\begin{equation*}
+\int \limits_{\underline{\theta}} ^\theta \sqrt{x(s)} \, ds
+\end{equation*}
+
+This is the utility derived from the agent's private information. Because the principal does not know the agent's type, they must incentivize the agent to reveal their type by paying an amount that makes it preferable to report $\theta$ rather than any other $\theta' < \theta$, which is precisely the integral over every other type the agent \textit{might} choose to report, $\theta' \in [\underline{\theta}, \theta]$, of the marginal utility derived from the allocation if the agent were actually that type.
+
+\item
+
+The expected revenue is
+
+\begin{align*}
+\mathbb{E}[t(\theta)] &= \int \limits_{\underline{\theta}} ^{\bar{\theta}} f(\theta) t(\theta) \, d\theta \\
+&= \int \limits_{\underline{\theta}} ^{\bar{\theta}} f(\theta) \left( \sqrt{x(\theta)}\theta -  \int \limits_{\underline{\theta}} ^\theta \sqrt{x(s)} \, ds - v(\underline{\theta})  \right) \, d\theta \\
+&= \int \limits_{\underline{\theta}} ^{\bar{\theta}} f(\theta) \sqrt{x(\theta)} \, d\theta - \int \limits_{\underline{\theta}} ^{\bar{\theta}} f(\theta) \left( \int \limits_{\underline{\theta}} ^\theta \sqrt{x(s)} \, ds \, \right) d\theta - v(\underline{\theta})
+\end{align*}
+
+Integrating by parts
+
+\begin{align*}
+\int \limits_{\underline{\theta}} ^{\bar{\theta}} f(\theta) \left( \int \limits_{\underline{\theta}} ^\theta \sqrt{x(s)} \, ds \, \right) d\theta &= F(z) \int \limits_{\underline{\theta}}^z \sqrt{x(s)} \, ds \bigg\rvert_{z=\underline{\theta}}^{z=\bar{\theta}} - \int \limits_{\underline{\theta}} ^{\bar{\theta}} F(\theta) \sqrt{x(\theta)} \, d\theta \\
+&= \int \limits_{\underline{\theta}} ^{\bar{\theta}} (1 - F(\theta)) \sqrt{x(\theta)} \, d\theta
+\end{align*}
+
+Substituting
+
+\begin{align*}
+\mathbb{E}[t(\theta)] &= \int \limits_{\underline{\theta}} ^{\bar{\theta}}  f(\theta) \left( \theta - \frac{1-F(\theta)}{f(\theta)} \right) \sqrt{x(\theta)} \, d\theta - v(\underline{\theta})
+\end{align*}
+
+Since $\mathbb{E}[t(\theta)]$ is decreasing in $v(\underline{\theta})$, to maximize expected revenue subject to the participation constraint $v(\underline{\theta}) \geq 0$, we set $v(\underline{\theta}) = 0$. Then
+
+\begin{equation*}
+\max \{ \mathbb{E}[t(\theta)] \} = \int \limits_{\underline{\theta}} ^{\bar{\theta}}  f(\theta) \left( \theta - \frac{1-F(\theta)}{f(\theta)} \right) \sqrt{x(\theta)} \, d\theta
+\end{equation*}
+
+\end{enumerate}
+
+\end{document}

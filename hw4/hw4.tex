@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Econ C103 Problem Set 4}
+\author{Sahil Chinoy}
+\date{February 14, 2017}
+
+\begin{document}
+\maketitle{}
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}[(a)]
+	\item
+
+	Let $\hat{m}_i = \max_{j \neq i} \{m_j\}$ denote the maximum bid submitted by agents $j \neq i$.
+
+	\begin{itemize}
+
+		\item
+
+		The set of possible messages for each agent is $M_i = \mathbb{R}_+$.
+
+		\item
+
+		The allocation is
+
+		$$x_i = 
+			\begin{cases} 
+		      1 & \text{if } m_i > \hat{m}_i \\
+		      0 & \text{otherwise}
+		   \end{cases}.
+		$$
+
+		\item
+
+		The transfer is
+
+		$$t_i = 
+			\begin{cases} 
+		      \hat{m}_i & \text{if } m_i > \hat{m}_i \\
+		      0 & \text{otherwise}
+		   \end{cases}.
+		$$
+
+	\end{itemize}
+
+	\item
+
+	We proceed by cases.
+
+	\begin{enumerate}[1.]
+
+		\item
+
+		If $\theta_i > \hat{m}_i$, then
+
+		\begin{itemize}
+			\item Bids $m_i > \theta_i$ result in winning the auction with positive payoff $\theta_i - \hat{m}_i > 0$.
+			\item Bids $\hat{m}_i < m_i < \theta_i$ result in winning the auction with positive payoff $\theta_i - \hat{m}_i > 0$.
+			\item Bids $m_i < \hat{m}_i$ result in losing the auction with payoff 0.
+		\end{itemize}
+
+		So the utility-maximizing bid is any $m_i > \hat{m}_i$.
+
+		\item
+
+		If $\theta_i < \hat{m}_i$, then
+
+		\begin{itemize}
+			\item Bids $m_i > \hat{m}_i$ result in winning the auction with negative payoff $\theta_i - \hat{m}_i < 0$.
+			\item Bids $\theta_i < m_i < \hat{m}_i$ result in losing the auction with payoff 0.
+			\item Bids $m_i < \theta_i$ result in losing the auction with payoff 0.
+		\end{itemize}
+
+		So the utility-maximizing bid is any $m_i < \hat{m}_i$.
+
+	\end{enumerate}
+
+	\item
+
+	Bidding truthfully, i.e. $m_i = \theta_i$, maximizes the agent's utility. We can see this from the previous section: If $\theta_i > \hat{m}_i$, then any bid $m_i > \hat{m}_i$ is optimal, so $m_i = \theta_i$ is optimal. Likewise, if $\theta_i < \hat{m}_i$, then any bid $m_i < \hat{m}_i$ is optimal, so $m_i = \theta_i$ is optimal. 
+
+	\item
+
+	We have just shown that the strategy of bidding truthfully, $s_i(\theta_i) = \theta_i$, is optimal for each agent independent of what the other agents do. Bidding truthfully is thus by definition a dominant strategy equilibrium. It is a \textit{unique} dominant strategy equilibrium because any deviation from this bid $s_i(\theta_i) = \theta_i \pm \epsilon$ would not be optimal in some cases ($\theta_i + \epsilon$ is not optimal if $\theta_i < \hat{m}$ and $\theta_i - \epsilon$ is not optimal if $\theta_i > \hat{m}$).
+
+	The expected revenue is thus the expected value of the second of $n$ draws from the distribution of types $F$. For $\theta$ to be the second-highest bid, we need exactly $n-2$ of the other $n-1$ agents to bid less than $\theta$, which occurs with probability $F(\theta)^{(n-2)}$, and we need exactly one of the other $n-1$ agents to bid more than $\theta$, which occurs with probability $(n-1)(1-F(\theta))$. So
+
+	\begin{equation*}
+	\mathbb{E}[t] = \int \limits_0^{\bar{\theta}} \theta f(\theta) F(\theta)^{(n-2)} (n-1)(1-F(\theta)) \; d\theta
+	\end{equation*}
+
+	\item
+
+	No. Consider the best response of player 1. If all other players bid 0, then player 1 could bid $\bar{\theta}$ and win the auction with transfer 0. But if one other player bids $m$, and $\theta_1 < m$, then the best response is to bid $m_1 < m$. So, the best response of player 1 depends on the behavior of other players; bidding $\bar{\theta}$ is not always optimal and thus this not a dominant strategy equilibrium.
+
+	\item
+
+	Yes. Player 1 expects $\hat{m}_1 = 0$, so any $m_1 > 0$ results in winning the auction, with positive payoff. The other players expect $\hat{m}_i = \bar{\theta}$, so they expect to lose the auction no matter what message they send; any $m_i \in [0, \bar{\theta}]$ results in payoff 0. Each agent's strategy is optimal given their expectation of the other agents' strategies, so this is a Bayes-Nash equilibrium.
+
+	\item
+
+	Given this strategy profile, the good will be allocated to player 1 with transfer $\hat{m}_1 = 0$, so the expected revenue is 0.
+
+\end{enumerate}
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}[(a)]
+
+	\item
+
+	The intuition is that if $s_i$ is the best response to \textit{every} possible set of messages $m_{-i}$, it is also the best response to the expectation of the Bayes-Nash equilibrium set of messages $\mathbb{E} [s_{-i}(\theta) \; | \; \theta]$.
+
+	Formally, if $s_i$ is a dominant strategy equilibrium, then
+
+	\begin{equation*}
+	\forall m_{-i}: s_i(\theta_i) \in \argmax_{m_i \in M_i} u(a(m_i, m_{-i}), \theta_i) 
+	\end{equation*}
+
+	so
+
+	\begin{equation*}
+	\forall m_{i} \; \forall m_{-i}: u(a(s_i(\theta_i), m_{-i}), \theta_i) > u(a(m_i, m_{-i}), \theta_i).
+	\end{equation*}
+
+	Then
+
+	\begin{equation*}
+	\forall \theta_i \; \forall m_{i} : u(a(s_i(\theta_i), s_{-i}(\theta_i)), \theta_i) > u(a(m_i, s_{-i}(\theta_i)), \theta_i).
+	\end{equation*}
+
+	and if $\theta_i$ is distributed with density $f(\theta_i)$ and support $[\underline{\theta_i}, \bar{\theta_i}]$
+
+	\begin{equation*}
+	\forall m_{i}: \int \limits_{\underline{\theta_i}}^{\bar{\theta_i}} f(\theta_i) \; u(a(s_i(\theta_i), s_{-i}(\theta_i)), \theta_i) \; d\theta_i > \int \limits_{\underline{\theta_i}}^{\bar{\theta_i}} f(\theta_i) \; u(a(m_i, s_{-i}(\theta_i)), \theta_i) \; d\theta_i.
+	\end{equation*}
+
+	Thus
+
+	\begin{equation*}
+	\forall m_{i} : \mathbb{E} [u(a(s_i(\theta), s_{-i}(\theta_i)), \theta_i) \; | \; \theta_i ] > \mathbb{E} [u(a(m_i, s_{-i}(\theta_i)), \theta_i) \; | \; \theta_i ]
+	\end{equation*}
+
+	and
+
+	\begin{equation*}
+	s_i(\theta_i) \in \argmax_{m_i \in M_i} \mathbb{E} [u(a(m_i, s_{-i}(\theta_i)), \theta_i) \; | \; \theta_i ]
+	\end{equation*}
+
+	so $s_i$ is a Bayes-Nash equilibrium.
+
+	\item
+
+	Consider a mechanism in which two agents $A$ and $B$ are each allocated a good if and only if they send the same message from the set $\{ 0, 1 \}$. Formally, $M_i = \{0, 1\}$, $x_i = 1$ if $m_A = m_B = 0$ or $m_A = m_B = 1$, otherwise $x_i = 0$. Assume the agents both have positive valuation for the good and that there are no transfers, i.e. $t_i = 0$.
+
+	Then the best response for $A$ is $m_A = 0$ if $m_B = 0$, or $m_A = 1$ if $m_B = 1$. The situation is symmetric for $B$. There is no response that is optimal \textit{independent} of what the other agent does, thus there is no dominant strategy equilibrium.
+
+	There are, however, two Bayes-Nash equilibria: $m_A = m_B = 1$ and $m_A = m_B = 0$.
+
+\end{enumerate}
+
+\end{document}

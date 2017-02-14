@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{enumerate}
+
+\usepackage{pbox}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+
+\newcommand{\heading}[1]{\bigskip \textbf{#1}}
+
+\title{Econ C103 Problem Set 1}
+\author{Sahil Chinoy}
+
+\begin{document}
+\maketitle{}
+
+\heading{Exercise 1}
+
+\begin{enumerate}[(a)]
+
+	\item
+	
+	$E[x] = \int \limits_{\mathbb{R}} x f(x) dx$
+
+	$V[x]= \int \limits_{\mathbb{R}} x^2 f(x) dx - (E[x])^2$
+
+	\item
+
+	$\int \limits_{\mathbb{R}} v(x) f(x) dx = - \int \limits_{\mathbb{R}} v(x) \frac{d}{dx}(1 - F(x)) dx = \int \limits_{\mathbb{R}} v'(x) (1 - F(x)) dx  - v(x)(1 - F(x)) \bigg\rvert_{-\infty} ^{+\infty}$, using integration by parts. This equals $\int \limits_{\mathbb{R}} v'(x) (1 - F(x)) dx  + \underset{x \to -\infty}\lim v(x) $, since $\underset{x \to +\infty}\lim (1 - F(x)) = 0$ and $\underset{x \to -\infty}\lim (1 - F(x)) = 1$.
+
+	\item
+
+	$P(y_1 < x) = P(x_1 < x) \cap P(x_2 < x)$, which implies $F_{y_1}(x) = F(x)^2$. Thus $f_{y_1}(x) = 2 F(x) f(x)$.
+
+	$P(y_2 < x) = 1 - P(y_2 \geq x) = 1 - (P(x_1 \geq x) \cap P(x_2 \geq x)) $, which implies $F_{y_2}(x) = 1 - (1 - F(x))^2$. Thus $f_{y_2}(x) = 2 (1 - F(x)) f(x)$.
+
+	\item
+
+	$E[y_1] = 2 \int \limits_{\mathbb{R}} x F(x) f(x) dx$
+
+	$E[y_2] = 2 \int \limits_{\mathbb{R}} x (1 - F(x)) f(x) dx$
+
+	\item
+
+	For $x \geq z$, $f_{y_1}(x | x \geq z) = \frac{P(y_1 = x)} {P(y_1 \geq z) } = \frac{2 F(x) f(x)} {1 - F(z)^2}$. For $x < z$, $f_{y_1}(x | x \geq z) = 0$. So $E[y_1 | y_1 > z] = \frac{2} {1 - F(z)^2} \int \limits_{z}^\infty x F(x) f(x) dx$.
+
+	\item 
+
+	For $x \geq z$, $f_{y_1}(x | y_2 = z) = \frac{P(y_1 = x) \cap P(y_2 = z)}{ P(y_2 = z) } = \frac{2 f(x) f(z)} {2 (1 - F(z)) f(z)} = \frac{f(x)}{1 - F(z)}$. For $x < z$, $f_{y_1}(x | y_2 = z) = 0$, since the maximum cannot be less than the minimum. So $E[y_1 | y_2 = z] = \frac{1}{1 - F(z)}\int \limits_{z}^\infty x f(x) dx$.
+
+\end{enumerate}
+
+\heading{Exercise 2}
+
+\begin{enumerate}[(a)]
+
+	\item
+
+	Since $m(\theta) = x^*$ is a maximum, it is defined implicitly by $f(x^*, \theta) = \frac{\partial w}{\partial x} = 0$. By the implicit function theorem, $m'(\theta) = \frac{ \partial x^*} {\partial \theta} = -\frac{\partial f / \partial \theta} {\partial f / \partial x^*} = - \frac{ \partial^2 w / \partial x \partial \theta} { \partial^2 w / \partial x^2}$.
+
+	\item
+
+	We are given that $w$ is concave in $x$, so $\frac{\partial^2 w}{\partial x^2 } < 0$. Thus $m(\theta)$ is increasing for all $\theta \in \Theta$ when $\frac{\partial^2 w}{\partial x \partial \theta } > 0$ and decreasing when $\frac{\partial^2 w}{\partial x \partial \theta } < 0$.
+
+	\item
+
+	$v(\theta) = w(m(\theta), \theta)$, so by the chain rule $v'(\theta) = \frac{\partial w} {\partial x^*} m'(\theta) + \frac{\partial w} {\partial \theta}$. But $\frac{\partial w}{\partial x^*} = 0$, since the derivative of the objective function is 0 at the maximum. So $v'(\theta) = \frac{\partial w} {\partial \theta} = w_\theta(m(\theta), \theta)$. This is an illustration of the envelope theorem.
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,214 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+
+\title{Econ C103 Problem Set 2}
+\author{Sahil Chinoy}
+
+\begin{document}
+\maketitle{}
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}[(a)]
+
+	\item
+
+	In this context, a mechanism consists of
+
+	\begin{itemize}
+
+		\item A set of messages $M$.
+
+		\item A rule that maps from the set of messages to the (real-valued) tax the worker pays $t: M \rightarrow \mathbb{R}$.
+
+		\item A rule that maps from the set of messages to the type of job the worker has $x: M \rightarrow \{l,h\}$.
+
+	\end{itemize}
+
+	\item
+
+	A direct mechanism is one in which the worker reports their ability $\theta$. This implies $M = [\underline{\theta}, \bar{\theta}]$.
+
+	\item
+
+	An incentive compatible direct mechanism is one in which it is always optimal for the worker to tell the truth about their ability, that is, $x(m) = x(\theta)$. This implies
+
+	\begin{equation*}
+	w_{x(\theta)} - t(\theta) - \frac{x(\theta)}{
+	\theta} \geq \max_m \left \{ w_{x(m)} - t(m) - \frac{x(m)}{\theta} \right \}
+	\end{equation*}
+
+	\item
+
+	Incentive compatibility implies that an individual with true ability $\theta$ should prefer to report $\theta \neq \theta'$.
+
+	\begin{equation*}
+	w_{x(\theta)} - t(\theta) - \frac{x(\theta)}{
+	\theta} \geq w_{x(\theta')} - t(\theta') - \frac{x(\theta')}{
+	\theta}
+	\end{equation*}
+	\begin{equation}
+	\frac{1}{\theta} (x(\theta') - x(\theta)) \geq w_{x(\theta')} - t(\theta') - (w_{x(\theta)} - t(\theta))
+	\end{equation}
+
+	Likewise, an individual with true ability $\theta'$ should prefer to report $\theta' \neq \theta$.
+
+	\begin{equation*}
+	w_{x(\theta')} - t(\theta') - \frac{x(\theta')}{
+	\theta'} \geq w_{x(\theta)} - t(\theta) - \frac{x(\theta)}{
+	\theta'}
+	\end{equation*}
+	\begin{equation}
+	\frac{1}{\theta'} (x(\theta) - x(\theta')) \geq w_{x(\theta)} - t(\theta) - (w_{x(\theta')} - t(\theta'))
+	\end{equation}
+
+	Adding (1) and (2)
+
+	\begin{equation*}
+	(\frac{1}{\theta} - \frac{1}{\theta'})(x(\theta') - x(\theta)) \geq 0
+	\end{equation*}
+
+	Since $0 \leq \underline{\theta}$, both $\theta$ and $\theta'$ are positive, so we can rearrange to find
+
+	\begin{equation*}
+	(\theta'- \theta)(x(\theta') - x(\theta)) \geq 0
+	\end{equation*}
+
+	Thus, for $\theta' > \theta$, $x(\theta') > x(\theta)$. This proves $x(\theta)$ is monotonically increasing.
+
+	\item 
+
+	Since $x = \{l,h\}$, we define $\theta_0 = \sup \{ \theta: x(\theta) = l \}$. Since a worker will always report the type that leads to the lowest taxes, the tax can only depend on the type of job the worker has, not on their ability.
+
+	\begin{equation*}
+	t(\theta) =  \begin{cases} 
+	      t_1, &\theta > \theta_0 \\
+	      t_0, & \theta < \theta_0
+	   \end{cases}
+	\end{equation*}
+
+	Workers with ability $\theta < \theta_0$ should prefer the low-intensity job and associated tax
+
+	\begin{equation}
+		w_l - t_0 - \frac{l}{\theta_0} \geq w_h - t_1 - \frac{h}{\theta_0}
+	\end{equation}
+
+	Likewise, workers with ability $\theta > \theta_0$ should prefer the high-intensity job and associated tax
+
+	\begin{equation}
+		w_l - t_0 - \frac{l}{\theta_0} \leq w_h - t_1 - \frac{h}{\theta_0}
+	\end{equation}
+
+	Combining (3) and (4)
+
+	\begin{equation*}
+		w_l - t_0 - \frac{l}{\theta_0} = w_h - t_1 - \frac{h}{\theta_0}
+	\end{equation*}
+	\begin{equation*}
+		t_1 = t_0 + (w_h - w_l) - \frac{h-l}{\theta_0}
+	\end{equation*}
+
+	So
+
+	\begin{equation*}
+	t(\theta) =  \begin{cases} 
+	      t_0 + (w_h - w_l) - \frac{h-l}{\theta_0}, &\theta > \theta_0 \\
+	      t_0, & \theta < \theta_0
+	   \end{cases}
+	\end{equation*}
+
+	\item
+
+	Since the outcome of any mechanism can be implemented in an incentive-compatible direct mechanism, the set of outcomes that can be implemented in any mechanism is characterized by the job allocation rule
+
+	\begin{equation*}
+	x(\theta) =  \begin{cases} 
+	      h, &\theta > \theta_0 \\
+	      l, & \theta < \theta_0
+	   \end{cases}
+	\end{equation*}
+
+	And the taxation rule
+
+	\begin{equation*}
+	t(\theta) =  \begin{cases} 
+	      t_0 + (w_h - w_l) - \frac{h-l}{\theta_0}, &\theta > \theta_0 \\
+	      t_0, & \theta < \theta_0
+	   \end{cases}
+	\end{equation*}
+
+	\item
+
+	Consider an indirect mechanism where the worker decides between high and low intensity jobs and reports only their wage $w_x \in \mathbb{R}$. Then $M = \mathbb{R}$. One outcome that can be implemented in this mechanism is a uniform tax $\tau$ on wages
+
+	\begin{equation*}
+	t(w_x) = \tau w_x
+	\end{equation*}
+
+	The allocation rule is meaningless, since the worker decides their own job.
+
+	\item
+
+	The participation constraint implies the agent has positive utility in all cases
+
+	\begin{equation*}
+	\max_m \left \{ w_{x(m)} - t(m) - \frac{x(m)}{\theta} \right \} \geq 0
+	\end{equation*}
+
+	In the context of taxation, this means that wages net of taxes and the cost of effort from working must be positive. If we consider a world in which unemployment is an option, i.e. the worker can choose to hold no job, receive no wage, and pay no tax ($x = w_x = t =0$), then the participation constraint is binding in the sense that an agent can opt for unemployment and thereby refuse to participate in the mechanism. If we require that everyone hold a job and pay taxes, then the participation constraint does not apply.
+
+	\item
+
+	For $l = w_l = 0$, we have
+
+	\begin{equation*}
+	E[t] = F(\theta_0) t_0 + (1 - F(\theta_0)) (t_0 + w_h - \frac{h}{\theta_0})
+	\end{equation*}
+
+	If we restrict ourselves to mechanisms where $t \leq w_{x(\theta)}$, then $t_0 \leq 0$, since $w_l = 0$. Clearly, the expected tax revenue is increasing in $t_0$, so the maximum expected revenue occurs for $t_0 = 0$. This implies a tax structure
+
+	\begin{equation*}
+	t(\theta) =  \begin{cases} 
+	      w_h - \frac{h}{\theta_0}, &\theta > \theta_0 \\
+	      0, & \theta < \theta_0
+	   \end{cases}
+	\end{equation*}
+
+	\item
+
+	When $t=0$, the worker will choose the high intensity job if
+
+	\begin{equation*}
+	w_h - \frac{h}{\theta} > 0
+	\end{equation*}
+	\begin{equation*}
+	\theta > \frac{h}{w_h}
+	\end{equation*}
+
+	With $w_h = 4$ and $h = 1$, workers with ability $\theta > \frac{1}{4}$ will choose the high intensity job. Given that $\theta$ is uniformly distributed, this implies the worker will choose the high intensity job with probability $\frac{3}{4}$.
+
+	\item 
+
+	With $t_0 = 0$, $w_h = 4$, $h=1$, $F(\theta) = \theta$
+
+	\begin{equation*}
+	E[t] = (1 - \theta_0) (4 - \frac{1}{\theta_0}) = 5 - 4\theta_0 - \frac{1}{\theta_0}
+	\end{equation*}
+
+	The expected revenue is maximized for $\frac{d E[t]}{d \theta_0} = 0$
+
+	\begin{equation*}
+	-4 + \frac{1}{\theta_0^2} = 0
+	\end{equation*}
+	\begin{equation*}
+	\theta_0 = \frac{1}{2}
+	\end{equation*}
+
+	So, workers with ability $\theta > \frac{1}{2}$ will choose the high intensity job. Given that $\theta$ is uniformly distributed, this implies the worker will choose the high intensity job with probability $\frac{1}{2}$.
+
+\end{enumerate}
+
+\end{document}
