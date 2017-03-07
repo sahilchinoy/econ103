@@ -1,0 +1,130 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Econ C103 Problem Set 6}
+\author{Sahil Chinoy}
+\date{March 7, 2017}
+
+\begin{document}
+\maketitle{}
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}[(a)]
+	\item
+
+	The efficient allocation rule is
+
+	\begin{equation*}
+	x^*(\theta) = \argmax_{x \in X} \sum \limits_{i=1}^n x_i \theta_i.
+	\end{equation*}
+
+	This implies $x_i = 1$ if the agent's value $\theta_i$ is one of the $k$ largest, or $\theta_i > \theta_{(n-k)}$, and $x_i = 0$ otherwise.\footnote{Here, $\theta_{(k)}$ denotes the $k^\text{th}$ order statistic.}
+
+	\item
+
+	We know that the only dominant strategy incentive compatible mechanisms that implement an efficient allocation are VCG mechanisms, characterized by the transfer
+
+	\begin{equation*}
+	t_i(m) = -\sum \limits_{j \neq i}^n x^*_j m_j + \tau_i(m_{-i}).
+	\end{equation*}
+
+	So
+
+	\begin{equation*}
+	t_i(m) =
+	\begin{cases} 
+      -\sum \limits_{q=1}^k m_{(n-q+1)} + m_i + \tau_i(m_{-i}) & \text{if } x_i = 1 \\
+      -\sum \limits_{q=1}^k m_{(n-q + 1)} + \tau_i(m_{-i}) & \text{else.}
+   	\end{cases}
+	\end{equation*}
+
+	\item
+
+	In the pivot mechanism,
+
+	\begin{equation*}
+	\tau_i(m_{-i}) = \max \limits_{x \in X} \sum \limits_{j \neq i}^n x_j m_j.
+	\end{equation*}
+
+	For agents who do get the object,
+
+	\begin{equation*}
+	\tau_i(m_{-i}) = \sum \limits_{q=1}^{k+1} m_{(n-q + 1)} - m_i
+	\end{equation*}
+
+	so $t_i(m) = m_{(n-k)}$, or the value of the agent with the $(k+1)^\text{th}$ highest value.
+
+	Agents who do not get the object are non-pivotal, so
+
+	\begin{equation*}
+	\tau_i(m_{-i}) = \sum \limits_{q=1}^k m_{(n-q + 1)}
+	\end{equation*}
+
+	which implies $t_i(m) = 0$.
+
+	Summarizing,
+
+	\begin{equation*}
+	t_i(m) = \begin{cases} 
+      m_{(n-k)} & \text{if } x_i = 1 \\
+      0 & \text{else.}
+   \end{cases}
+	\end{equation*}
+
+	This implies the total revenue is $k \cdot m_{(n-k)}$.
+
+	\item 
+
+	The DIC direct mechanism that maximizes revenue is the revenue pivotal mechanism, given by 
+
+	\begin{equation*}
+	t_i(m) = -\sum \limits_{j \neq i}^n x^*_j m_j + \sum \limits_{j \neq i}^n x^*_j m_j + x^*_i \underline{\theta} = \begin{cases} 
+      \underline{\theta} & \text{if } x_i = 1 \\
+      0 & \text{else.}
+   \end{cases}
+	\end{equation*}
+
+	This implies the total revenue is $k \underline{\theta} = k$, since each $\theta_i$ is drawn from the uniform distribution on $[1,10]$.
+
+\end{enumerate}
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}[(a)]
+
+	\item
+
+	The Pareto efficient allocations are:
+
+	\begin{itemize}
+		\item Two units to Agent 2: $x_2 = 2$, $x_1 = x_3 = 0$
+		\item Two units to Agent 3: $x_3 = 2$, $x_1 = x_2 = 0$
+		\item One unit to Agent 1, one unit to Agent 3: $x_1 = x_3 = 1$, $x_2 = 0$.
+	\end{itemize}
+
+	\item
+
+	When transfers are allowed, we showed that utilitarian efficiency is the same as Pareto efficiency. The allocation that maximizes the sum of physical utilities is one unit to Agent 1, one unit to Agent 3: $x_1 = x_3 = 1$, $x_2 = 0$.
+
+	\item
+
+	For each agent,
+
+	\begin{equation*}
+	t_i = -\sum \limits_{j \neq i}^3 w_j(x^*(m), \theta_j) +  \max \limits_{x \in X} \sum \limits_{j \neq i}^3 w_j(x(m), \theta_j)
+	\end{equation*}
+
+	Agent 1: $t_1 = -10 + 25 = 15$.
+
+	Agent 2: $t_2 = -30 + 30 = 0$. This makes sense, since the efficient allocation does not include Agent 2, so Agent 2 is non-pivotal.
+
+	Agent 3: $t_3 = -20 + 25 = 5$. 
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Econ C103 Problem Set 5}
+\author{Sahil Chinoy}
+\date{February 28, 2017}
+
+\begin{document}
+\maketitle{}
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}[(a)]
+	\item
+
+	Each agent $i \in \{1,2\}$ has type indicated by the value of the object that they have at the beginning of the game, $\theta_i \in \Theta = [0,1]$, and can send a message from $M_i = \{0,1\}$ indicating whether they want to exchange objects. If both agents choose $m_i = 1$, then the trade takes place, which we denote with $x = 1$. So the allocation rule is
+
+	\begin{equation*}
+	x(m) = 
+		\begin{cases} 
+	      0 & \text{if } m_1 = 0 \text{ or } m_2 = 0 \\
+	      1 & \text{if } m_1 = m_2 = 1
+	   \end{cases}
+	\end{equation*}
+
+	and each agent's utility is
+
+	\begin{equation*}
+	u_i(x, \theta_i) = 
+		\begin{cases} 
+	      \theta_i & \text{if } x = 0 \\
+	      \theta_{-i} & \text{if } x  = 1
+	   \end{cases}.
+	\end{equation*}
+
+	\item
+
+	Trading will never be Pareto efficient, so the only Pareto efficient outcome is the original allocation, $x = 0$. If $\theta_1 \neq \theta_2$, trading would make one agent worse off, since both agents assign the same value to the objects. If $\theta_1 = \theta_2$, then trading won't change either agent's utility and thus won't make either agent strictly better off.
+
+	Either allocation ($x = 0 \text{ or } 1$) maximizes the sum of the agents' utilities, which is always $\theta_1 + \theta_2$.
+
+	\item
+
+	The best response of each agent depends on the message the other agent sends and the other agent's type. If $m_{-i} = 0$, then trade will never take place, so it doesn't matter what message the agent chooses; we will pick $m_i = 0$. Then the best response for agent $i$ is
+
+	\begin{equation*}
+	\sigma_i(m_{-i}, \theta) = 
+		\begin{cases} 
+	      0 & \text{if } m_{-i} = 0 \text{, or } m_{-i} = 1 \text{ and } \theta_i \geq \theta_{-i} \\
+	      1 & \text{if } m_{-i} = 1 \text{ and } \theta_i < \theta_{-i} 
+	   \end{cases}.
+	\end{equation*}
+
+	Thus the agent's best response depends on $m_{-i}$ and $\theta_{-i}$. This means that there is no dominant strategy equilibrium.
+
+	\item
+
+	Given that the types $\theta$ are uniformly distributed on $[0,1]$, each agent initially expects the other agent's type to be $\mathbb{E}[\theta_{-i}] = 0.5$. This means it is rational to trade, i.e. send the message $m_i = 1$, only if $\theta_i  < 0.5$. But then the expected payoff from the trade for the \textit{other} agent is $\mathbb{E}[\theta_{-i} | m_{-i} = 1] = 0.25$, and if the first agent expects the other agent to play optimally, their expected payoff is now $\mathbb{E}[\theta_{-i} | m_{-i} = 1] = 0.125$, and so on. So trading will never be optimal.
+
+	Sending the message $m_i = 0$ is a Bayes-Nash equilibrium, however, because given that every agent expects the other agents to play $\sigma_i(\theta_i) = 0$, a trade can never occur, so it is never in anyone's interest to send the message $m_i = 1$ as it will not change the outcome. Formally, $\forall m_i \;\mathbb{E}[ u_i(x(\sigma_i, \sigma_{-i}), \theta_i) | \theta_i]  = \theta_i = \mathbb{E}[u_i(x(m_i, \sigma_{-i}), \theta_i) | \theta_i]$. So $\sigma_i(\theta_i) = 0$ is a Bayes-Nash equilibrium.
+
+
+\end{enumerate}
+
+\end{document}
