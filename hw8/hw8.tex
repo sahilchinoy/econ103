@@ -1,0 +1,195 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Econ C103 Problem Set 8}
+\author{Sahil Chinoy}
+\date{April 11, 2017}
+
+\begin{document}
+\maketitle{}
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}[(a)]
+	\item
+
+	With a reserve price of 1, $\mathbb{E}[\pi] = 2p_{11} + 2p_{10} + p_{00}$. With a reserve price of 2, $\mathbb{E}[\pi] = 2p_{11} + 4 p_{10}$.
+
+	\item
+
+	To maximize revenue, we want to extract all the agent's utility when they are of the lowest type. So, set $\mathbb{E}[u_i(\theta_i = 1)] = 0$. If the agent wins, their payoff will be $1 - t_i(\theta_i = 1)$, so $t_i(\theta_i) = 1$.
+
+	For dominant strategy incentive compatibility, we need it to be in the agent's interest to report their true type regardless of the other agent's message. Consider the case $m_{-i} = 1$. 
+
+	If $\theta_i = 1$, $u_i(\theta_i=1, m_i =1) = \frac{1}{2}(1-t_i(\theta_i = 1)) = 0$, and $u_i(\theta_i=1, m_i =2) = (1-t_i(\theta_i = 2)) < 0$. So, if if $t_i(\theta_i = 2) \geq 1$, it is in the agent's interest to report their true type.
+
+	If $\theta_i = 2$, $u_i(\theta_i=2, m_i =2) = (2-t_i(\theta_i = 2))$, and $u_i(\theta_i=2, m_i =1) = \frac{1}{2}(2-t_i(\theta_i = 1)) = \frac{1}{2}$. So, if $t_i(\theta_i = 2) \leq \frac{3}{2}$, it is in the agent's interest to report their true type.
+
+	Now, consider the case $m_{-i} = 2$, with $t_i(\theta_i = 2) \in [1, \frac{3}{2}]$.
+
+	If $\theta_i = 1$, $u_i(\theta_i=1, m_i =1) = 0$, and $u_i(\theta_i=1, m_i =2) = (1-t_i(\theta_i = 2)) < 0$. So it is in the agent's interest to report their true type.
+
+	If $\theta_i = 2$, $u_i(\theta_i=2, m_i =1) = 0$, and $u_i(\theta_i=2, m_i =2) = \frac{1}{2}(2-t_i(\theta_i = 2)) > 0$. So it is in the agent's interest to report their true type.
+
+	We want to maximize revenue, so set $t_i(\theta_i = 2) = \frac{3}{2}$. The mechanism is thus
+
+	$$x_i(\theta) = \begin{cases}
+		1 \text{ if } \theta_i > \theta_{-i} \\
+		0 \text{ else}
+	\end{cases}$$
+
+	and
+
+	$$t_i(\theta) = \begin{cases}
+		1 \text{ if } x_i = 1 \text{ and } \theta_i = 1 \\
+		\frac{3}{2} \text{ if } x_i = 1 \text{ and } \theta_i = 2 \\
+		0 \text{ else.}
+	\end{cases}$$
+
+	The expected revenue from this mechanism is $\mathbb{E}[\pi] = p_{00} + \frac{3}{2}p_{11} + 3p_{10}$.
+
+	It's not clear whether this mechanism raises more revenue than the second-price auction (with either reserve price 1 or 2) -- it depends on the joint distribution of types. For example, if $p_{00} = 0.5$, $p_{10} = 0.25$, and $p_{11} = 0$, this mechanism maximizes revenue, while if $p_{10} = 1$, $p_{00} =0$, and $p_{11} = 0$ the SPA with reserve price 2 maximizes revenue, and if $p_{00} = 0.5$, $p_{11} = 0.5$, and $p_{10} = 0$, the SPA with reserve price 1 maximizes revenue.
+
+	\item
+
+	Consider transfers conditional on having the higher type and thus being allocated the object, that is, if $x_i = 0$, then $t_i = 0$.
+
+	Now, set $\mathbb{E}[u_i(\theta) | \theta_i =1] = 0$. This implies $\frac{p_{00}}{2(p_{10} + p_{00})}(1 - t_i(\theta_i = 1)) = 0$, or $t_i(\theta_i = 1) = 1$.
+
+	For Bayes-Nash incentive compatibility to hold, it must be in agent $i$'s best interest to report their true type (given that the other agent also reports truthfully). Note that it wouldn't make sense for an agent with true type 1 to report a higher type, since if they won, they would receive negative utility. So, we consider the decision of an agent with true type 2
+
+	\begin{gather*}
+	\mathbb{E}[u_i(\theta_i = 2, m_i = 2) | m_{-i} = \theta_{-i}] \geq  \mathbb{E}[u_i(\theta_i = 2, m_i = 1) | m_{-i} = \theta_{-i}] \\
+	\frac{p_{11}}{2(p_{11} + p_{10})}(2-t_i(\theta_i = 2)) + \frac{p_{10}}{p_{11} + p_{10}}(2-t_i(\theta_i = 2)) \geq \frac{p_{10}}{2(p_{11} + p_{10})}(2-t_i(\theta_i = 1)) \\
+	\frac{p_{11}}{2(p_{11} + p_{10})}(2-t_i(\theta_i = 2)) + \frac{p_{10}}{p_{11} + p_{10}}(2-t_i(\theta_i = 2)) \geq \frac{p_{10}}{2(p_{11} + p_{10})}(2-t_i(\theta_i = 1)) \\
+	(2-t_i(\theta_i = 2))(p_{11} + 2p_{10}) \geq p_{10} \\
+	t_i(\theta_i = 2) \leq 2 - \frac{p_{10}}{p_{11} + 2p_{10}}.
+	\end{gather*}
+
+	To maximize revenue, we should maximize this transfer, so set $t_i(\theta_i = 2) = 2 - \frac{p_{10}}{p_{11} + 2p_{10}}$. Then the revenue-maximizing Bayes-Nash incentive compatible mechanism is
+
+	$$x_i(\theta) = \begin{cases}
+		1 \text{ if } \theta_i > \theta_{-i} \\
+		0 \text{ else}
+	\end{cases}$$
+
+	and
+
+	$$t_i(\theta) = \begin{cases}
+		1 \text{ if } x_i = 1 \text{ and } \theta_i = 1 \\
+		2 - \frac{p_{10}}{p_{11} + 2p_{10}} \text{ if } x_i = 1 \text{ and } \theta_i = 2 \\
+		0 \text{ else.}
+	\end{cases}$$
+
+	\item
+
+	Starting from the mechanism in part (c), we can construct an additional transfer $\tau_i(\theta_{-i})$ that depends only on the other agent's type and thus does not change the incentives of the agents. Further, we can set this transfer to extract all the agent's utility from participating in the mechanism defined in part (c).
+
+	In (c), the expected utility derived by agent $i$ from the mechanism is $v_i(\theta_i = 1) = 0$, and $v_i(\theta_i = 2) = \frac{p_{11}}{2(p_{11} + p_{10})} (2 - t_i(\theta_i = 2)) + \frac{p_{10}}{p_{11} + p_{10}} (2 - t_i(\theta_i = 2)) = \frac{p_{10}}{2(p_{11} + p_{10})}$.
+
+	We set the expected additional transfer equal to these expected utilities, so
+
+	$$\mathbb{E}[\tau(\theta_{-i}) | \theta_i = 1] = \frac{p_{00}}{p_{10} + p_{00}} \tau(\theta_{-i} = 1) + \frac{p_{10}}{p_{10} + p_{00}} \tau(\theta_{-i} = 2) = 0$$
+
+	and
+
+	$$\mathbb{E}[\tau(\theta_{-i}) | \theta_i = 2] = \frac{p_{10}}{p_{10} + p_{11}} \tau(\theta_{-i} = 1) + \frac{p_{11}}{p_{10} + p_{11}} \tau(\theta_{-i} = 2) = \frac{p_{10}}{2(p_{11} + p_{10})}.$$
+
+	Solving this system of equations, we find
+
+	$$\tau(\theta_{-i} = 1) = \frac{-{p_{10}}^2}{2(p_{11}p_{00} - {p_{10}}^2)}$$
+
+	and
+
+	$$\tau(\theta_{-i} = 2) = \frac{p_{10}p_{00}}{2(p_{11}p_{00} - {p_{10}}^2)}.$$
+
+	So the revenue-maximizing Bayes-Nash incentive compatible mechanism is $x_i(\theta)$ as in part (c) and $t_i^*(\theta) = t_i(\theta) + \tau(\theta_{-i})$ with $t_i(\theta)$ as in part (c).
+
+ 	\item
+
+ 	The mechanism in (d) generates more revenue than the mechanism in (c) because the principal uses the correlation across types to extract the information rent that the agent would receive in the uncorrelated case (which is equal to $\frac{p_{10}}{2(p_{11} + p_{10})}$ when $\theta_i = 2$, and 0 otherwise). Because information about the \textit{other} agent's type gives information about agent $i$'s type, there is no truly private information, and thus the agent cannot ``keep'' the extra utility he would otherwise derive from being incentivized to reveal his true type if it is $\theta_i = 2$.
+
+\end{enumerate}
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}[(a)]
+	\item
+
+	The social welfare is given by
+
+	$$SWF = \sum_i \left[ \alpha \theta_i + \frac{1-\alpha}{n} \sum_{j = 1}^n \theta_j \right] x_i.$$
+
+	The second term is the same for every agent. To maximize the first term, we should give the object to the agent with the greatest value. So the welfare maximizing allocation is
+
+	$$x_i(\theta) = \begin{cases}
+		1 \text{ if } \theta_i > \theta_{j \neq i} \\
+		0 \text{ else.}
+	\end{cases}$$
+
+	\item
+
+	The allocation is monotone in $\theta_i$ (strictly increasing differences), so it is implementable. 
+
+	As a check, we showed in class that an equivalent condition for the welfare-maximizing allocation to be implementable in dominant strategies is
+
+	$$\frac{\partial h_i}{\partial \theta_i} \geq \max_{j \neq i} \frac{\partial h_i}{\partial \theta_j}.$$
+
+	Here, we have $\frac{\partial h_i}{\partial \theta_i} = \alpha + \frac{1-\alpha}{n}$ and $\frac{\partial h_i}{\partial \theta_j} = \frac{1-\alpha}{n}$, so the allocation is indeed implementable. 
+
+	\item
+
+	Define $v_i(\theta) = h_i(\theta)x_i - t_i$, where $x_i$ is the optimal allocation from (a). Using the envelope rule,
+
+	$$\frac{\partial v_i(\theta)}{\partial \theta_i} = \frac{\partial h_i(\theta)}{\partial \theta_i} x_i = \left( \alpha + \frac{1-\alpha}{n} \right) x_i$$
+
+	because $\frac{\partial x_i}{\partial \theta_i} = 0$ for the optimal allocation.
+
+	\item Integrating,
+
+	$$v_i(\theta_i, \theta_{-i}) = v_i(0, \theta_{-i}) + \left( \alpha + \frac{1-\alpha}{n} \right) \int \limits_0^{\theta_i} x_i(s, \theta_{-i}) ds$$
+
+	and since $v_i(\theta) = h_i(\theta)x_i - t_i$,
+
+	$$t_i(\theta) = h_i(\theta)x_i - \left( \alpha + \frac{1-\alpha}{n} \right) \int \limits_0^{\theta_i} x_i(s, \theta_{-i}) ds- v_i(0, \theta_{-i}).$$
+
+	\item
+
+	Consider the transfer in (d) with $v_i(0, \theta_{-i}) = 0$. Then, if $x_i = 0$, $t_i = 0$. If $x_i = 1$, 
+
+	\begin{gather*}
+	t_i(\theta) = \alpha \theta_i + \frac{1-\alpha}{n} \sum_{j = 1}^n \theta_j - \left( \alpha + \frac{1-\alpha}{n} \right) (\theta_i - \tilde{\theta}) \\
+	t_i(\theta) = \frac{1-\alpha}{n} \sum \limits_{j\neq i} \theta_j + \left( \alpha + \frac{1-\alpha}{n} \right) \tilde{\theta}
+	\end{gather*}
+
+	where $\tilde{\theta}$ is the second-highest type.
+
+	The mechanism with the allocation in (a) is efficient, and with transfers as above, is dominant-strategy incentive compatible by construction. We still need to check that the participation constraint is satisfied.
+
+	If $x_i = 0$, $v_i(\theta) = 0$. If $x_i = 1$, then $\theta_i > \theta_{j\neq i}$ and 
+
+	$$v_i(\theta) = \alpha \theta_i + \frac{1-\alpha}{n} \sum_{j = 1}^n \theta_j - \left[ \frac{1-\alpha}{n} \sum \limits_{j\neq i} \theta_j + \left( \alpha + \frac{1-\alpha}{n} \right) \tilde{\theta} \right] = \left( \alpha + \frac{1-\alpha}{n} \right)(\theta_i - \tilde{\theta}) \geq 0.$$
+
+	So the agent derives nonnegative utility from the mechanism regardless of their type. This means the participation constraint is satisfied. To summarize, a welfare-maximizing mechanism is
+
+	$$x_i(\theta) = \begin{cases}
+		1 \text{ if } \theta_i > \theta_{j \neq i} \\
+		0 \text{ else}
+	\end{cases}$$
+
+	and
+
+	$$t_i(\theta) = \begin{cases}
+		\frac{1-\alpha}{n} \sum \limits_{j\neq i} \theta_j + \left( \alpha + \frac{1-\alpha}{n} \right) \tilde{\theta} \text{ if } \theta_i > \theta_{j \neq i} \\
+		0 \text{ else}
+	\end{cases}$$
+
+	where $\tilde{\theta}$ is the second-highest type.
+
+\end{enumerate}
+
+\end{document}

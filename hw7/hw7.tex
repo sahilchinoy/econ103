@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Econ C103 Problem Set 7}
+\author{Sahil Chinoy}
+\date{March 21, 2017}
+
+\begin{document}
+\maketitle{}
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}[(a)]
+	\item
+
+	Since every bidder pays his own bid with probability one, the expected revenue is just the sum of all bids
+
+	$$\sum \limits_{i=1}^N \mathbb{E}[t_i(\theta_i) | \theta_i] = \sum \limits_{i=1}^{N} b_i(\theta_i).$$
+
+	\item
+
+	By the revenue equivalence theorem, the revenue raised by the all-pay auction must be the same as the revenue raised by the second-price auction, given that they both implement the same allocation. So, if we assume a symmetric equilibrium, the expected transfer for an agent in each of the two auction formats must be the same. Since the expected transfer in the all-pay auction is just the bid, $b_{AP}(\theta_i)$, this implies
+
+	$$b_{AP}(\theta_i) = \mathbb{E}[t_i(\theta_i)]_{SP} = \int \limits_{\underline{\theta}}^{\theta_i} z \; dF^{n-1}(z).$$
+
+	To verify that this is an equilibrium, we first check that $b_{AP}(\theta_i)$ is increasing in $\theta_i$, which is clearly true, since we are integrating a positive function. We also need to check
+
+	\begin{gather*}
+	\theta_i \in \argmax_{z \in \Theta_i} \left\{ -(1 - F^{n-1}(z))\int \limits_{\underline{\theta}}^z s dF^{n-1}(s) + F^{n-1}(z) \left(\theta_i - \int \limits_{\underline{\theta}}^z s dF^{n-1}(s) \right) \right\} \\
+	\theta_i \in \argmax_{z \in \Theta_i} \left\{ -\int \limits_{\underline{\theta}}^z s dF^{n-1}(s) + F^{n-1}(z) \theta_i  \right\}
+	\end{gather*}
+
+	Taking the derivative to check the first-order condition,
+
+	\begin{equation*}
+	\theta_i (dF^{n-1}(z)) = z (dF^{n-1}(z))
+	\end{equation*}
+
+	which is true when $z = \theta_i$.
+
+	\item
+
+	Recall the equilibrium bid in a second-price auction is the agent's true valuation, $b_{SP}(\theta_i) = \theta_i$, and the equilibrium bid in a first-price auction is given by
+
+	$$b_{FP}(\theta_i) = \theta_i - \frac{1}{F^{n-1}(\theta_i)} \int \limits_{\underline{\theta}}^{\theta_i} F^{n-1}(z) \; dz .$$
+
+	For ease of comparison, let us assume a uniform distribution on $[0,1]$, so $F(\theta_i) = \theta_i$. Then $b_{FP}(\theta_i) = \frac{n-1}{n} \theta_i$ and $b_{AP}(\theta_i) = \frac{n-1}{n} (\theta_i)^n$. So $b_{SP} > b_{FP} > b_{AP}$.
+
+	We know that the equilibrium strategy for a first-price auction involves ``bid shading'' because the agent knows if they win, they will have to actually pay their bid, and if they bid their value they will extract zero utility. Similarly, when the agent knows they will have to pay their bid regardless of whether they win, they will bid even less -- since they know there is a low probability that they will win (and this chance decreases with the number of bidders $n$), they want to minimize their expected losses in the cases where they lose the auction.
+
+	\item 
+
+	Take
+
+	$$b'_{AP}(\theta_i) = c^{-1} \left( \int \limits_{\underline{\theta}}^{\theta_i} z \; dF^{n-1}(z) \right).$$
+
+	If $c(\cdot)$ is increasing, then $c^{-1}(\cdot)$ is increasing, so the bid function is still increasing in $\theta_i$. We need to check that this bid maximizes expected utility
+
+	\begin{align*}
+	\theta_i &\in \argmax_{z \in \Theta_i} \left\{ -(1 - F^{n-1}(z)) \, c(b_{AP}'(\theta_i)) + F^{n-1}(z) (\theta_i - c(b_{AP}'(\theta_i)) \right\}.
+	\end{align*}
+
+	But this just reduces to the same expression as part (b), so we already know it is true.
+
+\end{enumerate}
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}[(a)]
+
+	\item
+
+	Given uniformly distributed values, the expected value for agent 1 is $\mathbb{E}[\theta_1] = \overline{\theta_1}/2$, and the expected value for agent 2 is $\mathbb{E}[\theta_2] = \overline{\theta_2}/2$. Since, $\overline{\theta_2} > \overline{\theta_1}$, agent 2 values the object more on average.
+
+	\item
+
+	The CDF of the maximum value is given by
+
+	\[
+	 F(\theta_{max}) = 
+	  \begin{cases} 
+	   \frac{(\theta_{max})^2}{\overline{\theta_1} \, \overline{\theta_2}} & \text{if } \theta_{max} \in [0,\overline{\theta_1}]  \\
+	   \frac{\theta_{max}}{\overline{\theta_2}} & \text{if } \theta_{max} \in (\overline{\theta_1}, \overline{\theta_2}]
+	  \end{cases}.
+	\]
+
+	So the expected maximum value is
+
+	$$\int \limits_0^{\overline{\theta_2}} \theta_{max} f(\theta_{max}) d\theta_{max} = \int \limits_0^{\overline{\theta_1}}  \frac{2(\theta_{max})^2}{\overline{\theta_1} \, \overline{\theta_2}} d\theta_{max} + \int \limits_{\overline{\theta_1}}^{\overline{\theta_2}} \frac{\theta_{max}}{\overline{\theta_2}} d\theta_{max} = \frac{1}{2} \overline{\theta_2} + \frac{1}{6} \frac{\overline{\theta_1}^2}{\overline{\theta_2}}.$$
+
+	\item
+
+	The virtual value is given by
+
+	$$J(\theta_i) = \theta_i - \frac{1 - F(\theta_i)}{f(\theta_i)}.$$
+
+	For agent 1, $F(\theta_1) = \theta_1 / \overline{\theta_1}$ and $f(\theta_1) = 1 / \overline{\theta_1}$, so $J(\theta_1) = 2\theta_1 - \overline{\theta_1}.$ Symmetrically, $J(\theta_2) = 2\theta_2 - \overline{\theta_2}.$
+
+	\item
+
+	The revenue maximizing mechanism allocates the object to the agent with the highest virtual value whenever the virtual value is greater than 0. So, here, the revenue maximizing mechanism is a second-price auction with a reserve price of $\overline{\theta_1}/2$.
+
+	Intuitively, the reserve price is set by the type distribution of the agent with the \textit{lowest} type, because in order to maximize profits, we care only about making sure the bidder who values the object the least meets a minimum bid -- at that reserve price, we expect all other agents who value the object more will be willing to bid above the minimum.
+
+	\item
+
+	First, we calculate the expected transfer for agent 1. Agent 1 pays $\overline{\theta_1}/2$ when they value the object more than the reserve price and when agent 2 values the object less than the reserve price. Agent 1 pays $\theta_2$ when agent 2 values the object more than the reserve price and agent 1 values the object more than agent 2. So
+
+	$$\mathbb{E}[t_1] = \frac{\overline{\theta_1}}{2} \frac{1}{2} \frac{\overline{\theta_1}/2}{\overline{\theta_2}} + \int \limits_{\overline{\theta_1}/2}^{\overline{\theta_1}} \theta_2 \left( \int \limits_{\theta_2}^{\overline{\theta_1}} \frac{d\theta_1}{\theta_1} \right) \frac{d\theta_2}{\overline{\theta_2}} = \frac{5}{24} \frac{\overline{\theta_1}^2}{\overline{\theta_2}}.$$
+
+	Now, we calculate the expected transfer for agent 2. Agent 2 pays $\overline{\theta_1}/2$ when they value the object more than the reserve price and when agent 1 values the object less than the reserve price. Agent 2 pays $\theta_1$ when agent 1 values the object more than the reserve price and agent 2 values the object more than agent 1. So
+
+	$$\mathbb{E}[t_2] = \frac{\overline{\theta_1}}{2} \frac{1}{2} \left( 1 - \frac{\overline{\theta_1}/2}{\overline{\theta_2}} \right) + \int \limits_{\overline{\theta_1}/2}^{\overline{\theta_1}} \theta_1 \left( \int \limits_{\theta_1}^{\overline{\theta_2}} \frac{d\theta_2}{\theta_2} \right) \frac{d \theta_1}{\overline{\theta_1}} = \frac{5}{8} \overline{\theta_1} - \frac{5}{12} \frac{\overline{\theta_1}^2}{\overline{\theta_2}}.$$
+
+	Then the expected revenue is 
+
+	$$\mathbb{E}[t_1] + \mathbb{E}[t_2] =  \frac{5}{8} \overline{\theta_1} - \frac{5}{24} \frac{\overline{\theta_1}^2}{\overline{\theta_2}}.$$
+
+	\item
+
+	In general, we can pick any two $\overline{\theta_1}, \overline{\theta_2}$ such that the expected maximum value is the same, and the expected revenue will be different.
+
+	We see that if $\overline{\theta_1} = 1, \; \overline{\theta_2} = 2$, then the expected maximum value is $\frac{13}{12}$ and the expected revenue is $\frac{25}{48}$. But if, say $\overline{\theta_1} = \frac{3}{5} \sqrt{\frac{11}{2}}, \; \overline{\theta_2} = \frac{9}{5}$, then the expected maximum value is still $\frac{13}{12}$ but the expected revenue is $\frac{3}{8}\sqrt{\frac{11}{2}} - \frac{11}{48}$.
+
+\end{enumerate}
+
+\end{document}

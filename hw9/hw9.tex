@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Econ C103 Problem Set 9}
+\author{Sahil Chinoy}
+\date{April 18, 2017}
+
+\begin{document}
+\maketitle{}
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}[(a)]
+	
+	\item
+
+	Suppose the mechanism did condition on the cardinal preferences of the agents. Take allocation $a$ to be the agent's most preferred alternative, so $u_i(a) \geq u_i(\hat{a})$ for $\hat{a} \in A$. To be incentive-compatible, the allocation must be monotone.  So the probability that the mechanism achieves allocation $a$ must be increasing in $m_i(a)$, the utility that the agent \textit{reports} for allocation $a$. Then, since the agent does not pay a transfer that depends on their report, it is preferable for the agent to report $m_i(a) \to \infty$. So the mechanism is not incentive compatible, since $m_i(a) \neq u_i(a)$.
+
+	If instead the mechanism conditioned only on the ordinal preferences of the agent, the allocation would only change if the agent reported $m_i(a) < m_i(\hat{a})$ for some $\hat{a} \in A$ (because this implies that $a \prec_i \hat{a}$). But then, since the probability of allocation $a$ must be increasing in $m_i(a)$, this means the allocation $a$ occurs less often, and the agent is worse off. Then the agent is indifferent between any report $m_i(a) \geq u_i(a)$, thus the mechanism is dominant-strategy incentive compatible.
+
+	So, to be dominant-strategy incentive compatible, a mechanism must condition only on the ordinal preferences of the agents. Note that this is necessary but not sufficient for dominant-strategy incentive compatibility.
+
+	\item
+
+	The set of all possible preferences is
+
+	$$\{ \alpha \prec \beta \prec \gamma, \alpha \prec \gamma \prec \beta, \beta \prec \alpha \prec \gamma, \beta \prec \gamma \prec \alpha, \gamma \prec \alpha \prec \beta, \gamma \prec \beta \prec \alpha \}.$$
+
+	\item
+
+	Given $\alpha < \beta < \gamma$, the only single-peaked preferences are
+
+	$$\{ \alpha \prec \beta \prec \gamma, \alpha \prec \gamma \prec \beta, \gamma \prec \alpha \prec \beta, \gamma \prec \beta \prec \alpha \}.$$
+
+
+	\item
+
+	No, agent 3's preferences are not single-peaked. In the median voting mechanism, allocation $\beta$ is implemented.
+
+	\item
+
+	Yes, if agent 3 reports $\alpha$, then the allocation will be $\alpha$, which the agent prefers to $\beta$.
+
+\end{enumerate}
+
+\end{document}
